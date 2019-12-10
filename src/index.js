@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Redbox from 'redbox-react';
 
-import Presentation from './presentation';
+import Index from './presentation';
 
 const CustomErrorReporter = ({ error }) => <Redbox error={error} />;
 
@@ -14,14 +14,14 @@ CustomErrorReporter.propTypes = {
 
 ReactDOM.render(
   <AppContainer errorReporter={CustomErrorReporter}>
-    <Presentation />
+    <Index />
   </AppContainer>,
   document.getElementById('root')
 );
 
 if (module.hot) {
-  module.hot.accept('./presentation', () => {
-    const NextPresentation = require('./presentation').default;
+  module.hot.accept('./presentation/index.js', () => {
+    const NextPresentation = require('./presentation/index').default;
     ReactDOM.render(
       <AppContainer errorReporter={CustomErrorReporter}>
         <NextPresentation />
