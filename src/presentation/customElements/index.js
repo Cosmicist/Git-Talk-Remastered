@@ -5,7 +5,11 @@ import * as S from 'spectacle';
 import Shadowed from './shadowed';
 import Bordered from './bordered';
 
-const Img = props => <S.Image margin={'30px auto'} {...props} />;
+class Img extends React.PureComponent {
+  render() {
+    return <S.Image margin={'30px auto'} {...this.props} />
+  }
+}
 
 const Strong = props => <S.S type={'bold'} textColor={'tertiary'} {...props} />;
 

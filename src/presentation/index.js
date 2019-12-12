@@ -42,6 +42,7 @@ const theme = createTheme(
     tertiary: '#03A9FC',
     quaternary: '#1F2022',
     red: '#e63c3c',
+    green: '#3ce53c',
   },
   {
     primary: '"Press Start 2P"',
@@ -627,6 +628,96 @@ export default class Index extends React.Component {
               It will remember where's the <Strong>origin</Strong>al, to know
               where it should fetch from and push to. This will be called
               <Strong> origin</Strong> by default.
+            </P>
+          </Appear>
+        </Slide>
+
+
+
+        {/* TOPIC: Branching 101 */}
+
+
+
+        <Slide>
+          <Heading fit>Branching 101</Heading>
+        </Slide>
+
+        <Slide bgColor={'secondary'} textColor={'primary'}>
+          <P textColor={'primary'}>
+            A <Strong>branch</Strong> is simply a <Strong>pointer</Strong> to
+            a <Strong>commit</Strong>.
+          </P>
+
+          <Img src={'branches.svg'} />
+
+          <P textColor={'primary'}>
+            Git will automatically point the current branch to new commits as you go
+          </P>
+        </Slide>
+
+        <Slide bgColor={'secondary'} textColor={'primary'}>
+          <P textSize={30} textColor={'primary'}>
+            But, how does Git know which is the <Strong textColor={'green'}>current branch</Strong>?
+          </P>
+
+          <Appear>
+            <P textColor={'primary'}>
+              There's a special pointer called <Strong textColor={'green'}>HEAD
+              </Strong>. And it's just a <Strong>pointer to the current
+              branch</Strong>.
+            </P>
+          </Appear>
+
+          <Appear>
+            <Img src={'HEAD.svg'} />
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <P fit>Bonus: <Strong>Detached HEAD State</Strong></P>
+
+          <CodePane textSize={22} lang="clike" source={`Note: checking out '94a87f75a'.
+
+You are in 'detached HEAD' state. You can look around, make
+experimental changes and commit them, and you can discard any
+commits you make in this state without impacting any branches by
+performing another checkout.
+
+If you want to create a new branch to retain commits you create,
+you may do so (now or later) by using -b with the checkout
+command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 94a87f7... Added readme`}/>
+        </Slide>
+
+        <Slide>
+          <Heading fit>Confusing... right?</Heading>
+
+          <Appear>
+            <P>It's a lot simpler than it looks...</P>
+          </Appear>
+
+          <Appear>
+            <P>
+              The <Strong>detached HEAD state</Strong> happens when you <Strong>
+              check out a commit or a tag</Strong> that is <Strong>not the
+              latest</Strong> in the branch.
+            </P>
+          </Appear>
+
+          <Appear>
+            <P>
+              That is: <Strong>your HEAD no longer points to a branch</Strong>.
+            </P>
+          </Appear>
+
+          <Appear>
+            <P>
+              Git will let you make new commits, creating a tangent in history,
+              which you can keep by creating a new branch, or discard, by
+              checking out another branch.
             </P>
           </Appear>
         </Slide>
