@@ -15,7 +15,15 @@ import {
   Slide,
   Text,
   CodePane,
+  Table,
+  TableHeader,
+  TableHeaderItem,
+  TableBody,
+  TableRow,
+  TableItem
 } from 'spectacle';
+
+import CodeSlide from 'spectacle-code-slide';
 
 import {P, Bordered, Strong, Img} from './customElements';
 
@@ -40,6 +48,14 @@ const theme = createTheme(
     secondary: 'Montserrat',
   }
 );
+
+const code = {
+  blob: {
+    creation: () => require('../assets/code/blob/01-blob-create-file.example'),
+    hashObject: () => require('../assets/code/blob/02-blob-hash-object.example'),
+    verification: () => require('../assets/code/blob/03-blob-verify-data.example'),
+  },
+};
 
 export default class Index extends React.Component {
   render() {
@@ -304,9 +320,250 @@ export default class Index extends React.Component {
         </Slide>
 
         <Slide>
-          <Heading>Let's check this out</Heading>
+          <Heading fit>Let's check this out</Heading>
 
-          <P>We will version a file manually:</P>
+          <P>We will version a file <Strong>manually</Strong>:</P>
+
+          <Appear>
+            <div>
+              <CodePane textSize={22} lang={'clike'} source={code.blob.creation()}/>
+            </div>
+          </Appear>
+
+          <Appear>
+            <div>
+              <CodePane textSize={22} lang={'clike'} source={code.blob.hashObject()}/>
+            </div>
+          </Appear>
+
+          <Appear>
+            <div>
+              <CodePane textSize={22} lang={'clike'} source={code.blob.verification()}/>
+            </div>
+          </Appear>
+
+          <Appear>
+            <P fit>
+              As we can see, git now has a blob with our file's content.
+              This will be v1 of <Strong>some-file.txt</Strong>.
+            </P>
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <P>Let's add another line to the file:</P>
+
+          <Appear>
+            <CodePane textSize={22} lang={'clike'} source={'echo \'a new line\' >> some-file.txt'}/>
+          </Appear>
+
+          <Appear>
+            <CodePane textSize={22} lang={'clike'} source={'$ git hash-object -w some-file.txt\n' +
+            '1aeaedbf4ee8dccec5bc2b1f1168efef19378ffd'}/>
+          </Appear>
+
+          <Appear>
+            <CodePane textSize={22} lang="clike" source={'$ find .git/objects\n' +
+            '.git/objects\n' +
+            '.git/objects/1a\n' +
+            '.git/objects/1a/eaedbf4ee8dccec5bc2b1f1168efef19378ffd\n' +
+            '.git/objects/d6\n' +
+            '.git/objects/d6/75fa44e50606caa705c3f48de02cf129c7f9a2'}/>
+          </Appear>
+
+          <Appear><P>Now we have both versions of our file.</P></Appear>
+        </Slide>
+
+        <Slide>
+          <P>Let's see both versions</P>
+
+          <Appear>
+            <CodePane textSize={22} lang="clike" source={'$ git cat-file d675fa44e50606caa705c3f48de02cf129c7f9a2\n' +
+            'testing blobs'}/>
+          </Appear>
+
+          <Appear>
+            <CodePane textSize={22} lang="clike" source={'$ git cat-file 1aeaedbf4ee8dccec5bc2b1f1168efef19378ffd\n' +
+            'testing blobs\n' +
+            'a new line'}/>
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <Heading fit margin={'0 0 30px'}>But we lost the filenames in the process!</Heading>
+
+          <Appear>
+            <P>Yes, for now we'll do this manually...</P>
+          </Appear>
+
+          <Appear>
+            <div>
+              <P>Restore v1:</P>
+              <CodePane textSize={22} lang="clike" source={'git cat-file d675fa4... > some-file.txt'}/>
+            </div>
+          </Appear>
+
+          <Appear>
+            <div>
+              <P>Restore v2:</P>
+              <CodePane textSize={22} lang="clike" source={'git cat-file 1aeaedb... > some-file.txt'}/>
+            </div>
+          </Appear>
+
+          <Appear>
+            <P textSize={16}>
+              Of course this is ridiculously impractical, but is (a really
+              simplified version of) what Git does under the hood
+            </P>
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <Heading fit>
+            Enter the <Strong textColor={'red'}>Tree</Strong> object
+          </Heading>
+
+          <Appear>
+            <div>
+              <P>
+                A <Strong>tree</Strong> references other <Strong>trees</Strong> and
+                <Strong> blobs</Strong>.
+              </P>
+              <P>
+                It also stores the <Strong>filename</Strong> that correspond to
+                each tree and blob it contains.
+              </P>
+            </div>
+          </Appear>
+        </Slide>
+
+        <Slide bgColor={'secondary'} textColor={'primary'}>
+          <Heading fit>This is what a tree looks like</Heading>
+
+          <Img src={'tree-object.svg'}/>
+        </Slide>
+
+        <Slide bgColor={'secondary'} textColor={'primary'}>
+          <Heading fit>And this is what a tree file actually stores</Heading>
+
+          <Table>
+            <TableHeader>
+              <TableHeaderItem textSize={16}>mode</TableHeaderItem>
+              <TableHeaderItem textSize={16}>type</TableHeaderItem>
+              <TableHeaderItem textSize={16}>hash</TableHeaderItem>
+              <TableHeaderItem textSize={16}>name</TableHeaderItem>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableItem textSize={16}>100755</TableItem>
+                <TableItem textSize={16}>tree</TableItem>
+                <TableItem textSize={16}>05fd5a3</TableItem>
+                <TableItem textSize={16}>src</TableItem>
+              </TableRow>
+              <TableRow>
+                <TableItem textSize={16}>100644</TableItem>
+                <TableItem textSize={16}>blob</TableItem>
+                <TableItem textSize={16}>d3ef0cc</TableItem>
+                <TableItem textSize={16}>README.md</TableItem>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Slide>
+
+        <Slide>
+          <Heading fit>Hmm... it looks suspiciously like a filesystem...</Heading>
+
+          <Appear>
+            <P>That's because it's Git's representation of the files in the repository.</P>
+          </Appear>
+
+          <Appear>
+            <P>
+              A <Strong>tree</Strong> corresponds to a <Strong>directory</Strong>
+            </P>
+          </Appear>
+          <Appear>
+            <P>
+              A <Strong>blob</Strong> corresponds to <Strong>file contents
+              </Strong> (similar to inodes).
+            </P>
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <P>
+            You may have noticed that blobs and trees are identified by a <Strong>hash</Strong>
+          </P>
+        </Slide>
+
+        <Slide>
+          <P fit>
+            It's a <Strong>SHA1 checksum</Strong>
+          </P>
+        </Slide>
+
+        <Slide>
+          <Img src={'oh-i-see.gif'}/>
+        </Slide>
+
+        <Slide>
+          <P textSize={34}>
+            A <Strong>checksum</Strong> is a <Strong>hash</Strong> derived from
+            a <Strong>block of data</Strong>
+          </P>
+
+          <Appear>
+            <P>
+              The purpose is to <Strong>detect changes</Strong> that may be
+              introduced to a file.
+            </P>
+          </Appear>
+
+          <Appear>
+            <P>
+              <Strong>Willingly</Strong> by editing
+            </P>
+          </Appear>
+
+          <Appear>
+            <P>
+              Or <Strong>unwillingly</Strong>, caused during data transmission or
+              storage (file corruption).
+            </P>
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <P>
+            <Strong>Commits</Strong>, <Strong>blobs</Strong>, and <Strong>trees
+            </Strong> are <Strong textColor={'red'}>checksumed</Strong>
+          </P>
+
+          <Appear>
+            <P>
+              And the resulting <Strong>hash</Strong> is used to <Strong>
+              identify</Strong> each of this <Strong>objects</Strong>.
+            </P>
+          </Appear>
+
+          <Appear>
+            <P>Which also means...</P>
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <Heading fit>Data integrity FTW!</Heading>
+
+          <Appear>
+            <P>
+              There is <Strong>no data change or corruption</Strong> that can go
+              unnoticed to Git!
+            </P>
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <Img src={'magic.gif'}/>
         </Slide>
       </Deck>
     );

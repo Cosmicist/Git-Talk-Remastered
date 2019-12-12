@@ -11,7 +11,7 @@ const Strong = props => <S.S type={'bold'} textColor={'tertiary'} {...props} />;
 
 class P extends React.PureComponent {
   render() {
-    return <S.Text textSize={22} textColor={'secondary'} margin={'0 0 30px'} {...this.props} />
+    return <S.Text textSize={22} lineHeight={1.5} textColor={'secondary'} margin={'30px 0'} {...this.props} />
   }
 }
 

@@ -1,0 +1,2 @@
+$ git hash-object -w some-file.txt
+d675fa44e50606caa705c3f48de02cf129c7f9a2

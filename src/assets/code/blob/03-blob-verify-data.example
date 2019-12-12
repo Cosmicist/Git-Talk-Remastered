@@ -1,0 +1,4 @@
+$ find .git/objects
+.git/objects
+.git/objects/d6
+.git/objects/d6/75fa44e50606caa705c3f48de02cf129c7f9a2
