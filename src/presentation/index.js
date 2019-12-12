@@ -698,28 +698,28 @@ HEAD is now at 94a87f7... Added readme`}/>
           <Appear>
             <P>It's a lot simpler than it looks...</P>
           </Appear>
+        </Slide>
 
-          <Appear>
-            <P>
-              The <Strong>detached HEAD state</Strong> happens when you <Strong>
-              check out a commit or a tag</Strong> that is <Strong>not the
-              latest</Strong> in the branch.
-            </P>
-          </Appear>
+        <Slide>
+          <P>
+            The <Strong>detached HEAD state</Strong> happens when you <Strong>
+            check out a commit or a tag</Strong> that is <Strong>not the
+            latest</Strong> in the branch.
+          </P>
 
           <Appear>
             <P>
               That is: <Strong>your HEAD no longer points to a branch</Strong>.
             </P>
           </Appear>
+        </Slide>
 
-          <Appear>
-            <P>
-              Git will let you make new commits, creating a tangent in history,
-              which you can keep by creating a new branch, or discard, by
-              checking out another branch.
-            </P>
-          </Appear>
+        <Slide>
+          <P>
+            Git will let you make new commits, creating a tangent in history,
+            which you can keep by creating a new branch, or discard, by
+            checking out another branch.
+          </P>
         </Slide>
       </Deck>
     );
