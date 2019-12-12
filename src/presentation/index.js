@@ -750,6 +750,130 @@ HEAD is now at 94a87f7... Added readme`}/>
             </P>
           </Appear>
         </Slide>
+
+
+
+        {/* TOPIC: The Flow */}
+
+
+
+        <Slide bgImage={'braid.jpg'} bgRepeat={'no-repeat'} bgDarken={0.75}>
+          <Heading textColor={'secondary'}>The Flow</Heading>
+        </Slide>
+
+        <Slide>
+          <Heading fit>What do we do every day?</Heading>
+
+          <Appear>
+            <P>Besides commiting...</P>
+          </Appear>
+
+          <Appear>
+            <Heading fit>push &amp; pull</Heading>
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <P textSize={30}>You probaby know this already</P>
+          <Appear>
+            <P>
+              But you need to get this right, otherwise...
+            </P>
+          </Appear>
+
+          <Appear>
+            <div>
+              <Img src={'bad-time.png'} />
+
+              <P>YOU'RE GONNA HAVE A BAD TIME</P>
+            </div>
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <P>
+            <Strong>pull</Strong> = <Strong>fetch</Strong> + (<Strong>merge</Strong> | <Strong>rebase</Strong>)
+          </P>
+
+          <Appear>
+            <CodePane textSize={22} lang="clike" source={`$ git pull -> merge`} />
+          </Appear>
+
+          <Appear>
+            <CodePane textSize={22} lang="clike" source={`$ git pull --rebase -> rebase`} />
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <P textSize={40} textColor={'tertiary'}>Fetch</P>
+
+          <Appear>
+            <Img src={'fetch-fail.jpg'} />
+          </Appear>
+        </Slide>
+
+        <Slide bgColor={'secondary'} textColor={'primary'}>
+          <P textColor={'primary'}>
+            <Strong>Fetch</Strong> updates the <Strong>remote-tracking
+            branches</Strong> to reflect the state of the <Strong>remote
+            branches</Strong>
+          </P>
+
+          <Img src={'fetch.svg'} />
+
+          <P textColor={'primary'}>
+            Bringing new commits along, if there are any
+          </P>
+        </Slide>
+
+        <Slide>
+          <P textSize={36}>
+            Yep! Just that
+          </P>
+
+          <P>
+            We have the <Strong>new commits</Strong>, and the updated <Strong>remote-tracking
+            branches</Strong>...
+          </P>
+
+          <Appear>
+            <P textSize={36}>
+              BUT...
+            </P>
+          </Appear>
+        </Slide>
+
+        <Slide>
+          <P>Our <Strong>local branch</Strong> is still behind</P>
+
+          <Appear>
+            <P>Our <Strong>working directory</Strong> is still behind</P>
+          </Appear>
+
+          <Appear>
+            <P>We need to update both</P>
+          </Appear>
+
+          <Appear>
+            <P textSize="36">
+              <Strong>merge</Strong> | <Strong>rebase</Strong>
+            </P>
+          </Appear>
+        </Slide>
+
+
+
+        {/* TOPIC: The Flow - Example Case */}
+
+
+
+        <Slide bgColor={'secondary'} textColor={'primary'}>
+          <P textSize="36" textColor={'primary'}>
+            We'll use this case, a little more daunting
+          </P>
+
+          <Img src={'merge-rebase.svg'} />
+        </Slide>
       </Deck>
     );
   }
