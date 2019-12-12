@@ -721,6 +721,35 @@ HEAD is now at 94a87f7... Added readme`}/>
             checking out another branch.
           </P>
         </Slide>
+
+
+
+        {/* TOPIC: Remote-tracking branches */}
+
+
+
+        <Slide bgColor={'secondary'} textColor={'primary'}>
+          <Heading fit>Remote-tracking branches</Heading>
+
+          <Appear>
+            <P textColor={'primary'}>
+              <Strong>Remote-tracking branches</Strong> are <Strong>local
+              references</Strong> to the state of the branches in the remote(s).
+            </P>
+          </Appear>
+
+          <Appear>
+            <Img src={'remote-tracking-branches.svg'} />
+          </Appear>
+
+          <Appear>
+            <P textColor={'primary'}>
+              They <Strong>can't be moved</Strong>, that is done <Strong>
+              automatically</Strong> by Git when you <Strong>push</Strong> o
+              r <Strong>fetch</Strong>
+            </P>
+          </Appear>
+        </Slide>
       </Deck>
     );
   }
