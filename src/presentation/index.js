@@ -565,6 +565,71 @@ export default class Index extends React.Component {
         <Slide>
           <Img src={'magic.gif'}/>
         </Slide>
+
+
+
+        {/* TOPIC: Refreshing our memory */}
+
+
+
+        <Slide>
+          <Heading fit>Refreshing our memory</Heading>
+
+          <List bulletStyle={'25a0'}>
+            <Appear><ListItem>Working Directory</ListItem></Appear>
+            <Appear><ListItem>Staging area / Index</ListItem></Appear>
+            <Appear><ListItem>Remote Repository</ListItem></Appear>
+          </List>
+        </Slide>
+
+        <Slide>
+          <Heading fit textColor={'secondary'}>
+            The <Strong>Working Directory</Strong>
+          </Heading>
+
+          <P>
+            The <Strong>working directory</Strong> are your files at a given
+            point in time (commit). These are the files you work on.
+          </P>
+        </Slide>
+
+        <Slide>
+          <Heading fit textColor={'secondary'}>
+            The <Strong>Staging Area / Index</Strong>
+          </Heading>
+
+          <P>
+            The <Strong>staging area</Strong> (AKA <Strong>The Index</Strong>)
+            is a pre-commit stage that you use to add the changes to be
+            commited next.
+          </P>
+        </Slide>
+
+        <Slide>
+          <Heading fit textColor={'secondary'}>
+            The <Strong>Remote Repository</Strong>
+          </Heading>
+
+          <P>
+            The <Strong>remote repository</Strong> is a copy of your local
+            repository in some other (remote) machine.
+          </P>
+
+          <Appear>
+            <P>
+              When you <Strong>clone</Strong> a repository you're downloading a
+              copy of it
+            </P>
+          </Appear>
+
+          <Appear>
+            <P>
+              It will remember where's the <Strong>origin</Strong>al, to know
+              where it should fetch from and push to. This will be called
+              <Strong> origin</Strong> by default.
+            </P>
+          </Appear>
+        </Slide>
       </Deck>
     );
   }
